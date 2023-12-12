@@ -20,3 +20,4 @@
 
 ## ***NOTE:***
 - The emphasis in this problem set was on the correctness of the GPU usage (kernel development). Hence, the performance results will be analysed in the following modules.
+- All codes have been tested on a personal laptop with an NVIDIA GeForce RTX 2070 with Max-Q Design GPU
