@@ -1,0 +1,3 @@
+// The configured options and settings
+#define VectorAdd_VERSION_MAJOR @VectorAdd_VERSION_MAJOR@
+#define VectorAdd_VERSION_MINOR @VectorAdd_VERSION_MINOR@
