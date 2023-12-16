@@ -1,0 +1,3 @@
+// The configured options and settings
+#define Stencil_VERSION_MAJOR @Stencil_VERSION_MAJOR@
+#define Stencil_VERSION_MINOR @Stencil_VERSION_MINOR@

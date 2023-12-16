@@ -1,0 +1,3 @@
+// The configured options and settings
+#define MatrixMult_VERSION_MAJOR @MatrixMult_VERSION_MAJOR@
+#define MatrixMult_VERSION_MINOR @MatrixMult_VERSION_MINOR@
