@@ -1,4 +1,4 @@
-# Module 3 - Homework SOlutions
+# Module 3 - Homework Solutions
 - A personal laptop with NVIDIA GeForce RTX 2070 with Max-Q Design is used for the simulations.
 - ***Nsight-Compute*** has been used for the performance analysis.
 
