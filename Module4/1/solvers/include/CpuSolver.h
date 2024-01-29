@@ -15,4 +15,5 @@ public:
 	virtual ~CpuSolver() {}
 	void rowSums() override;
 	void colSums() override;
+	void solver() override;
 };

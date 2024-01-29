@@ -28,7 +28,16 @@ void CpuSolver<T>::colSums()
 	}
 }
 
+template <typename T>
+void CpuSolver<T>::solver()
+{
+	rowSums();
+	colSums();
+}
+
 template void CpuSolver<float>::rowSums();
 template void CpuSolver<double>::rowSums();
 template void CpuSolver<float>::colSums();
 template void CpuSolver<double>::colSums();
+template void CpuSolver<float>::solver();
+template void CpuSolver<double>::solver();

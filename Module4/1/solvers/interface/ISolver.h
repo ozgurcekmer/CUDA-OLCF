@@ -19,4 +19,5 @@ public:
 	virtual ~ISolver() {}
 	virtual void rowSums() = 0;
 	virtual void colSums() = 0;
+	virtual void solver() = 0;
 };

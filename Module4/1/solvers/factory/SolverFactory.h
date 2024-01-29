@@ -4,6 +4,7 @@
 
 #include "../interface/ISolver.h"
 #include "../include/CpuSolver.h"
+#include "../include/GpuSolver.h"
 
 template <typename T>
 class SolverFactory
@@ -25,6 +26,10 @@ public:
 		if (solverType == "cpu")
 		{
 			solverSelect = std::make_shared<CpuSolver<T>>(A, RowSums, ColSums);
+		}
+		else if (solverType == "gpu")
+		{
+			solverSelect = std::make_shared<GpuSolver<T>>(A, RowSums, ColSums);
 		}
 
 		return solverSelect;

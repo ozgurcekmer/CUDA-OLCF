@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <omp.h>
+#include <iomanip>
 
 #include "Parameters.h"
 #include "utilities/include/PrintVector.h"
@@ -11,6 +12,10 @@
 using std::cout;
 using std::endl;
 using std::vector;
+using std::left;
+using std::setprecision;
+using std::setw;
+using std::fixed;
 
 int main()
 {
@@ -37,7 +42,9 @@ int main()
 	SolverFactory<Real> refSolverFactory(A, refRowSums, refColSums);
 	std::shared_ptr<ISolver<Real>> refSolver = refSolverFactory.getSolver(refSolverName);
 	auto tInit = omp_get_wtime();
-	refSolver->rowSums();
+	refSolver->solver();
+	auto tFin = omp_get_wtime();
+	auto runtimeRef = (tFin - tInit) * 1000.0; // in ms
 	if (validate.validate(refRowSums))
 	{
 		cout << "Row sums correct!" << endl;
@@ -45,10 +52,7 @@ int main()
 	else
 	{
 		cout << "Row sums NOT correct!" << endl;
-	}	
-	auto tFin = omp_get_wtime();
-	auto runtimeRefRows = (tFin - tInit) * 1000.0; // in ms
-	refSolver->colSums();
+	}
 	if (validate.validate(refColSums))
 	{
 		cout << "Col sums correct!" << endl;
@@ -57,15 +61,16 @@ int main()
 	{
 		cout << "Col sums NOT correct!" << endl;
 	}
-	auto t0 = omp_get_wtime();
-	auto runtimeRefCols = (tFin - t0) * 1000.0; // in ms
+	
 
 	// Test Solver
 	cout << "\nSolver: " << testSolverName << endl;
 	SolverFactory<Real> testSolverFactory(A, testRowSums, testColSums);
 	std::shared_ptr<ISolver<Real>> testSolver = testSolverFactory.getSolver(testSolverName);
 	tInit = omp_get_wtime();
-	testSolver->rowSums();
+	testSolver->solver();
+	tFin = omp_get_wtime();
+	auto runtimeTest = (tFin - tInit) * 1000.0; // in ms
 	if (validate.validate(testRowSums))
 	{
 		cout << "Row sums correct!" << endl;
@@ -74,9 +79,6 @@ int main()
 	{
 		cout << "Row sums NOT correct!" << endl;
 	}
-	tFin = omp_get_wtime();
-	auto runtimeTestRows = (tFin - tInit) * 1000.0; // in ms
-	testSolver->colSums();
 	if (validate.validate(testColSums))
 	{
 		cout << "Col sums correct!" << endl;
@@ -85,17 +87,21 @@ int main()
 	{
 		cout << "Col sums NOT correct!" << endl;
 	}
-	t0 = omp_get_wtime();
-	auto runtimeTestCols = (tFin - t0) * 1000.0; // in ms
 
 	// Testing purposes
 	/*
 	printVector.printVector(A);
 	printVector.printVector(refRowSums);
 	printVector.printVector(refColSums);
-	*/
+	
 	printVector.printVector(testRowSums);
 	printVector.printVector(testColSums);
+	*/
 
+	cout << "\nRuntimes: " << endl;
+	cout << std::setprecision(2) << std::fixed;
+	cout << std::left << std::setw(20) << refSolverName << ": " << runtimeRef << " ms." << endl;
+	cout << std::left << std::setw(20) << testSolverName << ": " << runtimeTest << " ms." << endl;
+	cout << std::left << std::setw(20) << "Speedup" << ": " << runtimeRef / runtimeTest << endl;
 
 }

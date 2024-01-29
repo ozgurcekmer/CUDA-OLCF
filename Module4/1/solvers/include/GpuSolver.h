@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../interface/ISolver.h"
-#include "../../utilities/include/GpuCommon.h"
+#include "../../utilities/include/GpuHeaders.h"
 
 template <typename T>
 class GpuSolver : public ISolver<T>
@@ -26,4 +26,5 @@ public:
 	virtual ~GpuSolver();
 	void rowSums() override;
 	void colSums() override;
+	void solver() override;
 };
