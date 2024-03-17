@@ -1,6 +1,6 @@
 # OO Solutions of the CUDA-OLCF Training Series HWs
 - This repo was created to propose object-oriented (OO) homework solutions for CUDA training series provided by NVIDIA to OLCF and NERSC ([NVIDIA CUDA series archive](https://www.olcf.ornl.gov/cuda-training-series/)). The original homework repo by NVIDIA is public [here](https://github.com/olcf/cuda-training-series).
-- Just to make it clear: ***I do NOT represent NVIDIA***.
+- Just to make it clear: ***I do NOT represent NVIDIA***. I'm just a CUDA enthusiast.
 - This personal repo ***is NOT officially endorsed by NVIDIA***.
 - Some of the codes have been prepared to be generic to work on both NVIDIA and AMD GPUs.
 - The following thirteen modules have been provided by NVIDIA.
@@ -43,3 +43,11 @@
 
 ## Module 13
 - CUDA Graphs
+
+## General Notes
+### Creating ***Symbolic Links (Symlinks)*** for AMD versions
+- The following is used to create ***Symlinks*** of *.cu* files with *.hip* extensions.
+```
+ln -s cudaFile.cu hipFile.hip
+``` 
+- It is better only to work on cuda files, since their readibility is better on VIM.

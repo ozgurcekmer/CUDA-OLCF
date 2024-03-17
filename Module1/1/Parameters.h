@@ -6,11 +6,11 @@
 static const int BLOCK_SIZE = 3;
 static const int GRID_SIZE = 2;
 
-static const std::string solverName = "serial";
+static const std::string solverName = "omp";
 
 /*
     Options:
     - gpu
-    - openMP
+    - omp
     - serial
 */

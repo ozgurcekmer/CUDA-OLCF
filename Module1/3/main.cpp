@@ -1,16 +1,20 @@
-#include "utilities/MaxError.h"
-#include "Parameters.h"
-#include "utilities/RandomVectorGenerator.h"
-#include "solvers/interface/IMatrixMult.h"
-#include "solvers/factory/MatrixMultFactory.h"
-#include "utilities/WarmupGPU.h"
-#include "utilities/WarmupSetup.h"
-
+// Standard Libraries
 #include <iostream>
 #include <vector>
 #include <string>
 #include <omp.h>
 #include <iomanip>
+
+// Parameters
+#include "Parameters.h"
+
+// Utilities
+#include "utilities/include/MaxError.h"
+#include "utilities/include/RandomVectorGenerator.h"
+#include "utilities/include/WarmupGPU.h"
+
+// Solver Factory
+#include "solvers/factory/MatrixMultFactory.h"
 
 using std::cout;
 using std::endl;
@@ -34,35 +38,37 @@ int main()
     
     randomVector.randomVector(a);
     randomVector.randomVector(b);
-
+   
     WarmupGPU warmupGPU;
-    warmupSetup();
+    warmupGPU.setup(refGPU, testGPU);
 
-    if (refGPU)
-    {
-        warmupGPU.warmup();
-        cout << "Warmup for reference solver: " << refSolverName << endl;
-    }
+    cout << "RefGPU = " << refGPU << endl;
+    cout << "TestGPU = " << testGPU << endl;
 
     // Reference solver
     cout << "\nSolver: " << refSolverName << endl;
     MatrixMultFactory<Real> refSolverFactory(a, b, cRef);
     std::shared_ptr<IMatrixMult<Real>> refSolver = refSolverFactory.getSolver(refSolverName);
+    if (refGPU)
+    {
+        warmupGPU.warmup();
+        cout << "Warmup for reference solver: " << refSolverName << endl;
+    }
     auto tInit = omp_get_wtime();
     refSolver->matrixMult();
     auto tFin = omp_get_wtime();
     auto runtimeRef = (tFin - tInit) * 1000.0; // in ms
 
-    if ((!refGPU) && testGPU)
-    {
-        warmupGPU.warmup();
-        cout << "Warmup for test solver: " << testSolverName << endl;
-    }
 
     // Test gridder
     cout << "\nSolver: " << testSolverName << endl;
     MatrixMultFactory<Real> testSolverFactory(a, b, cTest);
     std::shared_ptr<IMatrixMult<Real>> testSolver = testSolverFactory.getSolver(testSolverName);
+    if ((!refGPU) && testGPU)
+    {
+        warmupGPU.warmup();
+        cout << "Warmup for test solver: " << testSolverName << endl;
+    }
     tInit = omp_get_wtime();
     testSolver->matrixMult();
     tFin = omp_get_wtime();

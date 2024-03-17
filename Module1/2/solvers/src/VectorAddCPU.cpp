@@ -5,7 +5,7 @@ void VectorAddCPU<T>::vectorAdd()
 {
 	for (auto i = 0; i < N; ++i)
 	{
-		this->c[i] = this->a[i] + this->b[i];
+		c[i] = a[i] + b[i];
 	}
 }
 

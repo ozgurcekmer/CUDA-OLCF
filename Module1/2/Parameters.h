@@ -7,21 +7,27 @@
 */
 
 #include <complex>
-#include <cmath>
 
 typedef float Real;
 
 static const int N = 1<<24; //(17 M)
 
-static const size_t BLOCK_SIZE = 1024;
-static const size_t GRID_SIZE = static_cast<size_t>(std::ceil(static_cast<float>(N) / BLOCK_SIZE));
+static const size_t BLOCK_SIZE = 256;
+static const size_t GRID_SIZE = N / BLOCK_SIZE;
 
 // Solver selection
 static const std::string refSolverName = "cpu";
 static const std::string testSolverName = "gpu";
 
 /*
-SOLVERS:
-cpu 
-gpu
+    SOLVERS:
+    - cpu 
+    - gpu
+
+
+    WARNING: All GPU solvers need to have the letters "gpu"
+    (in this order & lower case) in their names
 */
+
+static bool refGPU = false;
+static bool testGPU = false;

@@ -6,7 +6,7 @@
 #include "../interface/IMatrixMult.h"
 #include "../include/MatrixMultCPU.h"
 #include "../include/MatrixMultGPU.h"
-// #include "../include/MatrixMultBlas.h"
+#include "../include/MatrixMultBlas.h"
 
 template <typename T>
 class MatrixMultFactory
@@ -33,11 +33,11 @@ public:
 		{
 			solverSelect = std::make_shared<MatrixMultGPU<T>>(a, b, c);
 		}
-/*		else if (solverType == "blas")
+		else if (solverType == "blas")
 		{
 			solverSelect = std::make_shared<MatrixMultBlas<T>>(a, b, c);
 		}
-*/		return solverSelect;
+		return solverSelect;
 	}
 
 };

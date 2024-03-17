@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../interface/IHello.h"
-#include "../../utilities/GpuCommon.h"
+#include "../../utilities/include/GpuCommon.h"
 
 #include <stdio.h>
 

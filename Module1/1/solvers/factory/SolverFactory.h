@@ -21,7 +21,7 @@ public:
 		{
 			solverSelect = std::make_shared<GpuHello>();
 		}
-		else if (solverType == "openMP")
+		else if (solverType == "omp")
 		{
 			solverSelect = std::make_shared<OmpHello>();
 		}

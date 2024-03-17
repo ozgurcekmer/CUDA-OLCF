@@ -9,7 +9,7 @@ void MatrixMultCPU<T>::matrixMult()
         {
             for (auto k = 0; k < K; ++k)
             {
-                this->c[i * N + j] += this->a[i * K + k] * this->b[k * N + j];
+                c[i * N + j] += a[i * K + k] * b[k * N + j];
             }
         }
     }

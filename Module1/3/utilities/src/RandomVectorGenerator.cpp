@@ -1,4 +1,4 @@
-#include "RandomVectorGenerator.h"
+#include "../include/RandomVectorGenerator.h"
 
 template <typename T>
 void RandomVectorGenerator<T>::randomVector(std::vector<T>& v) const
