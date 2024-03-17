@@ -9,6 +9,6 @@ void helloWorld()
 void GpuHello::hello()
 {
 	gpuReportDevice();
-	helloWorld << < GRID_SIZE, BLOCK_SIZE >> > ();
+	helloWorld <<< GRID_SIZE, BLOCK_SIZE >>> ();
 	gpuDeviceSynchronize();
 }
