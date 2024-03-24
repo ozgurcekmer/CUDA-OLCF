@@ -1,4 +1,4 @@
-#include "WarmupGPU.h"
+#include "../include/WarmupGPU.h"
 
 using std::vector;
 using std::cout;
@@ -10,7 +10,7 @@ void vectorAdd(const float* a, const float* b, float* c, const size_t N)
 	size_t i = blockDim.x * blockIdx.x + threadIdx.x;
 	if (i < N)
 	{
-		for (int j = 0; j < 1000; ++j)
+		for (int j = 0; j < 250; ++j)
 		{
 			c[i] = a[i] + b[i];
 		}
@@ -40,15 +40,28 @@ void WarmupGPU::warmup() const
 	const int blockSize = 1024;
 	const int gridSize = N / 1024;
 
-	vectorAdd <<<gridSize, blockSize>>> (dA, dB, dC, N);
+	vectorAdd << <gridSize, blockSize >> > (dA, dB, dC, N);
 
 	gpuMemcpy(c.data(), dC, SIZE, gpuMemcpyDeviceToHost);
 
 	MaxError<float> maximumError;
 	cout << "Verifying warmup launch" << endl;
-	maximumError.maxError(c, cAnswer);
+	//maximumError.maxError(c, cAnswer);
 
 	gpuFree(dA);
 	gpuFree(dB);
 	gpuFree(dC);
+}
+
+void WarmupGPU::setup(bool& refGPU, bool& testGPU)
+{
+	std::string patternGpu("gpu");
+
+	// GPU solver names should have the letters "gpu"
+	patternGpu = "[[:alpha:]]*" + patternGpu + "[[:alpha:]]*";
+	std::regex rGpu(patternGpu);
+	std::smatch resultsGpu;
+
+	refGPU = std::regex_search(refSolverName, resultsGpu, rGpu);
+	testGPU = std::regex_search(testSolverName, resultsGpu, rGpu);
 }

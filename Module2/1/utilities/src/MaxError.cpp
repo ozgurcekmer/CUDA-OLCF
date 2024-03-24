@@ -1,4 +1,4 @@
-#include "MaxError.h"
+#include "../include/MaxError.h"
 
 using std::cout;
 using std::endl;
