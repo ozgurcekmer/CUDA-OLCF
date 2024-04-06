@@ -35,3 +35,29 @@
 
 <img src="images/SGEMM_RTX.png" alt="SGEMM NVIDIA" width="400"/>
 <img src="images/DGEMM_RTX.png" alt="DGEMM NVIDIA" width="400"/>
+
+## Dynamic vs Static Shared Memory
+### Static
+```
+const int size = 48;
+__global__ void k(...)
+{
+  __shared__ int temp[SIZE];
+  ...
+}
+
+
+k <<< grid, block >>> (...);
+```
+
+### Dynamic
+```
+__global__ void k(...)
+{
+  __shared__ int temp[];
+  ...
+}
+
+int sharedSizeInBytes = 192;
+k <<< grid, block, sharedSizeInBytes >>> (...);
+```
