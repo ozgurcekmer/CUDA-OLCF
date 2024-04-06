@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../interface/IMatrixMult.h"
-#include "../../utilities/GpuCommon.h"
+#include "../../utilities/include/GpuCommon.h"
 
 #include <vector>
 #include <iostream>

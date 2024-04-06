@@ -55,7 +55,7 @@ public:
 		{
 			solverSelect = std::make_shared<BlockedCPU<T>>(a, b, c);
 		}
-		else if (solverType == "shared")
+		else if (solverType == "gpuShared")
 		{
 			solverSelect = std::make_shared<MatrixMultShared<T>>(a, b, c);
 		}

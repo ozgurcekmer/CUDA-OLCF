@@ -39,3 +39,7 @@
 - The emphasis in this problem set was on the correctness of the GPU usage (kernel development). Hence, the performance results will be analysed in the following modules.
 - All codes have been developed and tested on a personal laptop (***Hagi***) with an NVIDIA GeForce RTX 2070 with Max-Q Design GPU
 - HIP codes have been tested on a GPU node of [***Setonix***](https://pawsey.org.au/systems/setonix/).
+- ***Setonix*** has 192 GPU-enabled nodes
+    - one 64-core AMD Trento CPU
+    - 4 AMD MI250X GPU cards providing 8 logical GPUs per node
+    - each MI250X GPU has 2 GCDs (Global Compute Dies)

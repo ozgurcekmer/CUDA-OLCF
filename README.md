@@ -1,8 +1,13 @@
 # OO Solutions of the CUDA-OLCF Training Series HWs
 - This repo was created to propose object-oriented (OO) homework solutions for CUDA training series provided by NVIDIA to OLCF and NERSC ([NVIDIA CUDA series archive](https://www.olcf.ornl.gov/cuda-training-series/)). The original homework repo by NVIDIA is public [here](https://github.com/olcf/cuda-training-series).
 - Some of the codes have been prepared to be generic to work on both NVIDIA and AMD GPUs.
+- All codes have been developed and tested on a personal laptop (***Hagi***) with an NVIDIA GeForce RTX 2070 with Max-Q Design GPU
+- HIP codes have been tested on a GPU node of [***Setonix***](https://pawsey.org.au/systems/setonix/).
+- ***Setonix*** has 192 GPU-enabled nodes
+    - one 64-core AMD Trento CPU
+    - 4 AMD MI250X GPU cards providing 8 logical GPUs per node
+    - each MI250X GPU has 2 GCDs (Global Compute Dies)
 - The following thirteen modules have been provided by NVIDIA.
-
 ## Module 1
 - Introduction to CUDA C++
 

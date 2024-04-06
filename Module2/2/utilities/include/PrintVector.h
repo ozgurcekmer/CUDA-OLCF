@@ -4,7 +4,7 @@
 #include <iostream>
 #include <complex>
 
-#include "../Parameters.h"
+#include "../../Parameters.h"
 
 template <typename T>
 class PrintVector

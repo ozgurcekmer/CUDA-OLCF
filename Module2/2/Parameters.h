@@ -2,8 +2,11 @@
 
 #include <string>
 
-//typedef float Real;
-typedef double Real;
+static bool refGPU = false;
+static bool testGPU = false;
+
+typedef float Real;
+//typedef double Real;
 ///*
 static const int M = 1024;
 static const int K = 1024;
@@ -23,18 +26,25 @@ static const size_t cacheBlockJ = 32;
 static const size_t cacheBlockK = 32;
 
 // Solver selection
-static const std::string refSolverName = "shared";
+static const std::string refSolverName = "gpu";
 static const std::string testSolverName = "gpuBlas";
 
 /*
-SOLVERS:
-cpu 
-gpu
-gpuBlas
-blas
-shared
-reordered
-outer
-blocked
-omp
+	SOLVERS:
+
+	CPU Solvers:
+	- cpu
+	- omp
+	- blas
+	- outer
+	- blocked
+	- reordered
+
+	GPU Solvers:
+	- gpu
+	- gpuBlas
+	- gpuShared
+
+	WARNING: All GPU solvers need to have the letters "gpu"
+	(in this order & lower case) in their names
 */
