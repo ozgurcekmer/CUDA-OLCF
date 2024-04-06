@@ -9,6 +9,7 @@
 - The results below are obtained using a personal laptop with NVIDIA GeForce RTX 2070 with Max-Q Design 
 
 <img src="images/StencilRTX.png" alt="Stencil NVIDIA" width="400"/>
+<img src="images/StencilAMD.png" alt="Stencil AMD" width="400"/>
 
 # HW 2
 - Matrix multiply (SGEMM & DGEMM)
@@ -31,10 +32,14 @@
         - Naive
         - Shared memory
         - Cublas
-- SGEMM & DGEMM results with NVIDIA GeForce RTX 2070 with Max-Q Design 
+
+- To build cublas/hipblas solvers, use -cublas/-hipblas while compiling your code.
+- SGEMM & DGEMM results with NVIDIA GeForce RTX 2070 with Max-Q Design & a GPU node on Setonix (AMD MI250X)
 
 <img src="images/SGEMM_RTX.png" alt="SGEMM NVIDIA" width="400"/>
+<img src="images/SGEMM_AMD.png" alt="SGEMM AMD" width="400"/>
 <img src="images/DGEMM_RTX.png" alt="DGEMM NVIDIA" width="400"/>
+<img src="images/DGEMM_AMD.png" alt="DGEMM AMD" width="400"/>
 
 ## Dynamic vs Static Shared Memory
 ### Static
