@@ -91,7 +91,7 @@ void MatrixMultShared<T>::matrixMult()
     gpuDeviceProp_t devProp;
     gpuGetDeviceProperties(&devProp, device);
     
-    sharedMatrixMult << < GRID_SIZE, BLOCK_SIZE >> > (dA, dB, dC);
+    sharedMatrixMult <<< GRID_SIZE, BLOCK_SIZE >>> (dA, dB, dC);
     gpuCheckErrors("gpu kernel launch failure");
     copyD2H();
 }

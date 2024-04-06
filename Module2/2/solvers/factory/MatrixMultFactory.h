@@ -10,7 +10,7 @@
 #include "../include/OuterCPU.h"
 #include "../include/BlockedCPU.h"
 #include "../include/OmpCPU.h"
-#include "../include/MatrixMultBlas.h"
+//#include "../include/MatrixMultBlas.h"
 #include "../include/MatrixMultGPU.h"
 #include "../include/MatrixMultShared.h"
 
@@ -59,11 +59,12 @@ public:
 		{
 			solverSelect = std::make_shared<MatrixMultShared<T>>(a, b, c);
 		}
-		else if (solverType == "blas")
+/*		else if (solverType == "blas")
 		{
 			solverSelect = std::make_shared<MatrixMultBlas<T>>(a, b, c);
 		}
-		else if (solverType == "gpuBlas")
+*/		
+    else if (solverType == "gpuBlas")
 		{
 			solverSelect = std::make_shared<BlasGPU<T>>(a, b, c);
 		}

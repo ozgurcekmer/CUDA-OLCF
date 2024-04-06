@@ -73,7 +73,7 @@ void MatrixMultGPU<T>::matrixMult()
     gpuDeviceProp_t devProp;
     gpuGetDeviceProperties(&devProp, device);
     
-    gpuMatrixMult << < GRID_SIZE, BLOCK_SIZE >> > (dA, dB, dC);
+    gpuMatrixMult <<< GRID_SIZE, BLOCK_SIZE >>> (dA, dB, dC);
     gpuCheckErrors("gpu kernel launch failure");
     copyD2H();
 }
