@@ -33,7 +33,7 @@
         - Shared memory
         - Cublas
 
-- To build cublas/hipblas solvers, use -cublas/-hipblas while compiling your code.
+- To build cublas/hipblas solvers, use -lcublas/-lhipblas while compiling your code.
 - SGEMM & DGEMM results with NVIDIA GeForce RTX 2070 with Max-Q Design & a GPU node on Setonix (AMD MI250X)
 
 <img src="images/SGEMM_RTX.png" alt="SGEMM NVIDIA" width="400"/>
