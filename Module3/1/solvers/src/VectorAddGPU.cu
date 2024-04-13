@@ -6,11 +6,16 @@ using std::vector;
 
 template <typename T>
 __global__
-void gpuVectorAdd(const T* a, const T* b, T* c) 
+void gpuVectorAdd(const T* a, const T* b, T* c, const int N) 
 {
-    size_t i = blockDim.x * blockIdx.x + threadIdx.x;
+    int i = blockDim.x * blockIdx.x + threadIdx.x;
+    int stride = blockDim.x * gridDim.x;
+
+    for (int idx = i; idx < N; idx += stride)
+    {
+        c[idx] = a[idx] + b[idx];
+    }
     
-    c[i] = a[i] + b[i];
 
 }
 
@@ -52,20 +57,28 @@ VectorAddGPU<T>::~VectorAddGPU()
 template <typename T>
 void VectorAddGPU<T>::vectorAdd()
 {
+    gpuReportDevice();
     deviceAllocations();
     copyH2D();
      
+    // int blocksPerSM = 2048 / BLOCK_SIZE;
+
+    int devID;
+    int numSMs;
+    gpuGetDevice(&devID);
+
+    int blocksPerSM = 32;
+
+    gpuDeviceGetAttribute(&numSMs, gpuDevAttrMultiProcessorCount, devID);
+    cout << "There are " << numSMs << " SMs in this device." << endl;
+    cout << "Blocks per SM: " << blocksPerSM << endl;
+
+    const int gridSize = blocksPerSM * numSMs;
+
     cout << "Block size: " << BLOCK_SIZE << endl;
-    cout << "Grid size : " << GRID_SIZE << endl;
-
-    // cudaFuncSetCacheConfig(reinterpret_cast<const void*>(devGridKernelOlder), cudaFuncCachePreferL1);
-
-    int device;
-    gpuGetDevice(&device);
-    gpuDeviceProp_t devProp;
-    gpuGetDeviceProperties(&devProp, device);
+    cout << "Grid size : " << gridSize << endl;
         
-    gpuVectorAdd << < GRID_SIZE, BLOCK_SIZE >> > (dA, dB, dC);
+    gpuVectorAdd << < gridSize, BLOCK_SIZE >> > (dA, dB, dC, N);
     gpuCheckErrors("gpu kernel launch failure");
     copyD2H();
 }
