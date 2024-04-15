@@ -15,7 +15,6 @@ typedef float Real;
 static const int N = 1<<25; //(17 M)
 
 static const int BLOCK_SIZE = 1024;
-static const int GRID_SIZE = static_cast<size_t>(std::ceil(static_cast<float>(N) / BLOCK_SIZE));
 
 // Solver selection
 static const std::string refSolverName = "cpu";

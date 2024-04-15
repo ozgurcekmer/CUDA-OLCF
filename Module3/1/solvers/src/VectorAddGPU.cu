@@ -61,24 +61,22 @@ void VectorAddGPU<T>::vectorAdd()
     deviceAllocations();
     copyH2D();
      
-    // int blocksPerSM = 2048 / BLOCK_SIZE;
+    int blocksPerSM = 2048 / BLOCK_SIZE;
 
     int devID;
     int numSMs;
     gpuGetDevice(&devID);
 
-    int blocksPerSM = 32;
-
     gpuDeviceGetAttribute(&numSMs, gpuDevAttrMultiProcessorCount, devID);
     cout << "There are " << numSMs << " SMs in this device." << endl;
     cout << "Blocks per SM: " << blocksPerSM << endl;
 
-    const int gridSize = blocksPerSM * numSMs;
+    const int GRID_SIZE = blocksPerSM * numSMs;
 
     cout << "Block size: " << BLOCK_SIZE << endl;
-    cout << "Grid size : " << gridSize << endl;
+    cout << "Grid size : " << GRID_SIZE << endl;
         
-    gpuVectorAdd << < gridSize, BLOCK_SIZE >> > (dA, dB, dC, N);
+    gpuVectorAdd << < GRID_SIZE, BLOCK_SIZE >> > (dA, dB, dC, N);
     gpuCheckErrors("gpu kernel launch failure");
     copyD2H();
 }
