@@ -32,8 +32,8 @@ void VectorAddGPU<T>::deviceAllocations()
 template<typename T>
 void VectorAddGPU<T>::copyH2D()
 {
-    gpuMemcpy(dA, this->a.data(), SIZE, cudaMemcpyHostToDevice);
-    gpuMemcpy(dB, this->b.data(), SIZE, cudaMemcpyHostToDevice);
+    gpuMemcpy(dA, this->a.data(), SIZE, gpuMemcpyHostToDevice);
+    gpuMemcpy(dB, this->b.data(), SIZE, gpuMemcpyHostToDevice);
     gpuCheckErrors("gpuMemcpy H2D failure");
 }
 

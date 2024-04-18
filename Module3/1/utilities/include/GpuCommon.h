@@ -30,7 +30,7 @@
 #define gpuEventElapsedTime hipEventElapsedTime
 #define gpuDeviceSynchronize hipDeviceSynchronize
 #define gpuDeviceGetAttribute hipDeviceGetAttribute
-#define gpuDevAttrMultiProcessorCount hipDevAttrMultiProcessorCount
+#define gpuDevAttrMultiProcessorCount hipDeviceAttributeMultiprocessorCount
 #define gpuGetErrorString hipGetErrorString
 #define gpuError_t hipError_t
 #define gpuErr hipErr
