@@ -76,7 +76,7 @@ void VectorAddGPU<T>::vectorAdd()
     cout << "Block size: " << BLOCK_SIZE << endl;
     cout << "Grid size : " << GRID_SIZE << endl;
         
-    gpuVectorAdd << < GRID_SIZE, BLOCK_SIZE >> > (dA, dB, dC, N);
+    gpuVectorAdd <<< GRID_SIZE, BLOCK_SIZE >>> (dA, dB, dC, N);
     gpuCheckErrors("gpu kernel launch failure");
     copyD2H();
 }
