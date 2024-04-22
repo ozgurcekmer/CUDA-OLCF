@@ -1,0 +1,2 @@
+workload_name,command,host_name,host_cpu,host_distro,host_kernel,host_rocmver,date,gpu_soc,numSE,numCU,numSIMD,waveSize,maxWavesPerCU,maxWorkgroupSize,L1,L2,sclk,mclk,cur_sclk,cur_mclk,L2Banks,name,numSQC,hbmBW,ip_blocks
+workload_B1T1024,./game,nid002944,AMD EPYC 7A53 64-Core Processor,SUSE Linux Enterprise Server 15 SP4,5.14.21-150400.24.46_12.0.73-cray_shasta_c,5.2.3-109,Mon Apr 22 04:44:57 2024 (AWST),gfx90a,8,110,4,64,32,1024,16,8192,1700,1600,800,1600,32,mi200,56,1638.4,roofline
