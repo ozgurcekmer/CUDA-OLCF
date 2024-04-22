@@ -32,3 +32,40 @@ omnitrace-instrument -o Jacobi_hip.inst -- ./Jacobi_hip
 srun <srun args> omnitrace-run -- ./Jacobi_hip.inst
 
 ```
+#### Hardware Counters: List All
+```
+srun ... omnitrace-avail --all
+```
+
+## Omniperf
+- Profile
+```
+omniperf profile -n workload_name [profile options] [roofline options] -- <CMD> <ARGS>
+```
+- Analyze
+```
+omniperf analyze -p <path_to_workloads_mi200>
+
+// write the output in a text file
+omniperf analyze -p <path_to_workloads_mi200> &> newAnalyze.txt
+
+// include the analysis of only the specified kernel
+omniperf analyze -p <path_to_workloads_mi200> -k 1 &> newAnalyze.txt
+```
+
+- To use a lightweight standalone GUI with CLI analyzer
+```
+omniperf analyze -p <path_to_workloads_mi200> --gui
+```
+- Database
+```
+omniperf database <interaction type> [connection options]
+```
+- More information
+```
+omniperf profile --help
+```
+
+
+
+

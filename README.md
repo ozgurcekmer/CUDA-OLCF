@@ -54,3 +54,15 @@
 ln -s cudaFile.cu hipFile.hip
 ``` 
 - It is better only to work on cuda files, since their readibility is better on VIM.
+
+### Working on Setonix GPUs
+- The following should be setup:
+```
+module swap PrgEnv-gnu PrgEnv-cray
+module load rocm craype-accel-amd-gfx90a
+export MPICH_GPU_SUPPORT_ENABLED=1
+module load omniperf // if needed
+module load omnitrace // if needed
+
+```
+

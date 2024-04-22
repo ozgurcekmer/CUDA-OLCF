@@ -59,12 +59,6 @@ int main()
     auto tFin = omp_get_wtime();
     auto runtimeRef = (tFin - tInit) * 1000.0; // in ms
 
-    if ((!refGPU) && testGPU)
-    {
-        warmupGPU.warmup();
-        cout << "Warmup for test solver: " << testSolverName << endl;
-    }
-
     // Test gridder
     cout << "\nSolver: " << testSolverName << endl;
     VectorAddFactory<Real> testSolverFactory(a, b, cTest);

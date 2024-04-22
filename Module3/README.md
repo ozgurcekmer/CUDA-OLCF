@@ -30,13 +30,26 @@ gpuVectorAdd <<< gridSize, BLOCK_SIZE >>> (dA, dB, dC, N);
 ``` 
 * The functions starting with ***gpu*** are defined in **utilities/GpuCommon.h**
 ### Performance results - **SETONIX**:
+| Solver | Solver Runtime (ms) | Kernel Runtime (ms) | L1 (GB/s) | L2 - Read (GB/s) | L2 - Write (GB/s) |
+| --- | ---: | ---: | ---: | ---: | ---: | 
+| CPU | 15.09 | N/A | N/A | N/A | N/A |
+| GPU (1, 1) | 6,981.72 | 6,962.53 | 0.93 | 0.04 | 0.02 | 
+| GPU (1, 1024) | 35.78 | 16.60 | 24.25 | 16.17 | 7.99 |
+| GPU (220, 1024)* | 19.52 | 0.36 | 1,126.99 | 751.34 | 370.96 |
+* A single GPU on a Setonix GPU node has 110 SMs. To achieve the maximum occupancy (2048 threads per SM), we need to use 2 blocks per SM since we are using 1024 threads per blocks.
+- Build, run & omniperf commands:
+```
+# build
+hipcc -x hip -std=c++17 ../main.cpp ../utilities/src/*.cpp ../utilities/src/*.hip ../solvers/src/*.cpp ../solvers/src/*.hip -o game -D__HIP_ROCclr__ -D__HIP_ARCH_GFX90A__=1 --offload-arch=gfx90a -fopenmp -O2 -I${MPICH_DIR}/include -L${MPICH_DIR}/lib -lmpi -L${CRAY_MPICH_ROOTDIR}/gtl/lib -lmpi_gtl_hsa -DUSEHIP
 
-| Solver | Solver Runtime (ms) | Kernel Runtime (ms) | Bandwidth (GB/s) |
-| --- | --- | --- | --- |
-| CPU |  |  |  
-| GPU (1, 1) |  |  | 
-| GPU (1, 1024) |  |  | 
-| GPU (160, 1024) |  |  | 
+# run with omniperf profiler
+srun -N 1 -n 1 -c 8 --gres=gpu:1 --gpus-per-task=1 --gpu-bind=closest omniperf profile -n workload_B1T1 --roof-only -k 0 -- ./game
+
+# profiler analysis
+omniperf analyze -p workloads/workload_B1T1024/mi200/ -k 0 &> workloads/workload_B1T1024/B1T1024_Analyze.txt
+
+```
+- ***-k kernelNumber*** is used to profile only the specified kernel
 
 ### ***NOTE:***
 
