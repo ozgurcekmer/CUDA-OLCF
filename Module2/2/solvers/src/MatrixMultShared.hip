@@ -6,7 +6,7 @@ using std::vector;
 
 template <typename T>
 __global__
-void sharedMatrixMult(const T* a, const T* b, T* c)
+void sharedMatrixMult(T* a, T* b, T* c)
 {
     __shared__ T aShared[blockSize * blockSize];
     __shared__ T bShared[blockSize * blockSize];

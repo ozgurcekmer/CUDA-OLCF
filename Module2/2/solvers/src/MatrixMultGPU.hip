@@ -6,7 +6,7 @@ using std::vector;
 
 template <typename T>
 __global__
-void gpuMatrixMult(const T* a, const T* b, T* c)
+void gpuMatrixMult(T* a, T* b, T* c)
 {
     size_t i = blockIdx.y * blockDim.y + threadIdx.y;
     size_t j = blockIdx.x * blockDim.x + threadIdx.x;

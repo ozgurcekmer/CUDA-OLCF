@@ -5,7 +5,7 @@ using std::cout;
 using std::endl;
 
 __global__
-void vectorAdd(const float* a, const float* b, float* c, const size_t N)
+void vectorAdd(float* a, float* b, float* c, size_t N)
 {
 	size_t i = blockDim.x * blockIdx.x + threadIdx.x;
 	if (i < N)

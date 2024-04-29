@@ -6,7 +6,7 @@ using std::vector;
 
 template <typename T>
 __global__
-void gpuVectorAdd(const T* a, const T* b, T* c, const int N) 
+void gpuVectorAdd(T* a, T* b, T* c, int N) 
 {
     int i = blockDim.x * blockIdx.x + threadIdx.x;
     int stride = blockDim.x * gridDim.x;

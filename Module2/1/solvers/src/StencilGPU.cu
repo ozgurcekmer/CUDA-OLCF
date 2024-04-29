@@ -6,7 +6,7 @@ using std::vector;
 
 template <typename T>
 __global__
-void gpuStencil(const T *in, T *out)
+void gpuStencil(T *in, T *out)
 {
     __shared__ 
     T temp[BLOCK_SIZE + 2*RADIUS];

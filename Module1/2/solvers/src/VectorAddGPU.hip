@@ -6,7 +6,7 @@ using std::vector;
 
 template <typename T>
 __global__
-void gpuVectorAdd(const T* a, const T* b, T* c) 
+void gpuVectorAdd(T* a, T* b, T* c) 
 {
     size_t i = blockDim.x * blockIdx.x + threadIdx.x;
     
