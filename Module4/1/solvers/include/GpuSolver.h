@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../interface/ISolver.h"
-#include "../../utilities/include/GpuHeaders.h"
+#include "../../utilities/include/GpuCommon.h"
 
 template <typename T>
 class GpuSolver : public ISolver<T>

@@ -1,11 +1,18 @@
+// Standard Libraries
 #include <iostream>
 #include <vector>
 #include <omp.h>
 #include <iomanip>
 
+// Parameters
 #include "Parameters.h"
+
+// Utilities
 #include "utilities/include/PrintVector.h"
 #include "utilities/include/Validate.h"
+#include "utilities/include/WarmupGPU.h"
+
+// Solver factory
 #include "solvers/factory/SolverFactory.h"
 #include "solvers/interface/ISolver.h"
 
@@ -37,10 +44,21 @@ int main()
 	vector<Real> refColSums(DSIZE, 0.0);
 	vector<Real> testColSums(DSIZE, 0.0);
 
+	WarmupGPU warmupGPU;
+	warmupGPU.setup(refGPU, testGPU);
+
+	cout << "RefGPU = " << refGPU << endl;
+	cout << "TestGPU = " << testGPU << endl;
+
 	// Reference Solver
 	cout << "\nSolver: " << refSolverName << endl;
 	SolverFactory<Real> refSolverFactory(A, refRowSums, refColSums);
 	std::shared_ptr<ISolver<Real>> refSolver = refSolverFactory.getSolver(refSolverName);
+	if (refGPU)
+	{
+		warmupGPU.warmup();
+		cout << "Warmup for reference solver: " << refSolverName << endl;
+	}
 	auto tInit = omp_get_wtime();
 	refSolver->solver();
 	auto tFin = omp_get_wtime();
@@ -67,6 +85,11 @@ int main()
 	cout << "\nSolver: " << testSolverName << endl;
 	SolverFactory<Real> testSolverFactory(A, testRowSums, testColSums);
 	std::shared_ptr<ISolver<Real>> testSolver = testSolverFactory.getSolver(testSolverName);
+	if ((!refGPU) && testGPU)
+	{
+		warmupGPU.warmup();
+		cout << "Warmup for test solver: " << testSolverName << endl;
+	}
 	tInit = omp_get_wtime();
 	testSolver->solver();
 	tFin = omp_get_wtime();
