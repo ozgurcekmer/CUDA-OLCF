@@ -4,7 +4,10 @@
 
 #include "../interface/ISolver.h"
 #include "../include/CpuSolver.h"
-#include "../include/GpuSolver.h"
+#include "../include/GpuNaive.h"
+#include "../include/GpuReduce.h"
+#include "../include/GpuReduceA.h"
+#include "../include/GpuWarpShuffle.h"
 
 template <typename T>
 class SolverFactory
@@ -25,12 +28,22 @@ public:
 		{
 			solverSelect = std::make_shared<CpuSolver<T>>(A, Sum);
 		}
-		else if (solverType == "gpu")
+		else if (solverType == "gpuNaive")
 		{
-			solverSelect = std::make_shared<GpuSolver<T>>(A, Sum);
+			solverSelect = std::make_shared<GpuNaive<T>>(A, Sum);
 		}
-
+		else if (solverType == "gpuReduce")
+		{
+			solverSelect = std::make_shared<GpuReduce<T>>(A, Sum);
+		}
+		else if (solverType == "gpuReduceA")
+		{
+			solverSelect = std::make_shared<GpuReduceA<T>>(A, Sum);
+		}
+		else if (solverType == "gpuWarpShuffle")
+		{
+			solverSelect = std::make_shared<GpuWarpShuffle<T>>(A, Sum);
+		}
 		return solverSelect;
 	}
-
 };

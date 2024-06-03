@@ -21,9 +21,9 @@ void PrintVector<T>::printVector(const std::vector<T>& v) const
         ++counter;
     }
     
-    /*for (int i = 0; i < DSIZE; ++i)
+    /*for (int i = 0; i < N; ++i)
     {
-        for (int j = 0; j < DSIZE; ++j)
+        for (int j = 0; j < N; ++j)
         {
             cout << v[i] << " ";
         }

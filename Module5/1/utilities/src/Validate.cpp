@@ -6,9 +6,15 @@ using std::endl;
 template<typename T>
 inline bool Validate<T>::validate(const std::vector<T>& v)
 {
-	if (v[0] != static_cast<T>(N))
+	for (auto i = 0; i < v.size(); ++i)
 	{
-		return false;
+		if (v[i] != static_cast<T>(N))
+		{
+			cout << "Results mismatch at "
+				<< i << ", was: " << v[i] << " should be: "
+				<< static_cast<T>(N) << endl;
+			return false;
+		}
 	}
 	return true;
 }

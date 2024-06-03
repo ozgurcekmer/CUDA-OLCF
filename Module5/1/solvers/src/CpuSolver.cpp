@@ -4,7 +4,7 @@ template <typename T>
 void CpuSolver<T>::solver()
 {
 	T temp = 0.0;
-	for (auto i : A)
+	for (const auto &i : A)
 	{
 		temp += i;
 	}
