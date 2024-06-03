@@ -1,4 +1,7 @@
 # Module 5 - Homework Solutions
+- ***A VERY IMPORTANT INITIAL NOTE:*** 
+  - AtomicXXX cannot work with templates
+  - AtomicXXX doesn't work with ***double***?
 - A personal laptop with NVIDIA GeForce RTX 2070 with Max-Q Design is used for the simulations.
 - ***Nsight-Compute*** has been used for the performance analysis.
 
