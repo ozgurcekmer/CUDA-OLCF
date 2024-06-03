@@ -9,11 +9,10 @@
 - Sum of the elements of a vector
 
 ## HW 2
-- Finding the maximum and the index of the maximum in an array
+- Finding the maximum in an array
  
 ## HW 3
-- A GPU solver for HW4
-
+- A new GPU solver for HW4
 
 ### ***NOTE:***
 - All codes have been tested on a personal laptop with an NVIDIA GeForce RTX 2070 with Max-Q Design GPU
