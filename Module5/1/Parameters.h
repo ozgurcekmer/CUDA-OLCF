@@ -7,12 +7,13 @@ typedef float Real;
 //typedef double Real;
 
 // Solver selection
-static const std::string refSolverName = "gpuNaive";
-static const std::string testSolverName = "gpuWarpShuffle";
+static const std::string refSolverName = "cpuOmp";
+static const std::string testSolverName = "gpuReduce";
 /*
 	SOLVERS:
     CPU Solvers:
     - cpu
+    - cpuOmp
 
     GPU Solvers:
     - gpuNaive: a naive atomic solution
@@ -38,7 +39,7 @@ static bool testGPU = false;
 */
 
 // Vector dimension
-const size_t N = 1<<23; 
+const size_t N = 1<<24; 
 //const size_t N = 72 * 1024;
 
 

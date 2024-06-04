@@ -4,6 +4,7 @@
 
 #include "../interface/ISolver.h"
 #include "../include/CpuSolver.h"
+#include "../include/CpuOmp.h"
 #include "../include/GpuNaive.h"
 #include "../include/GpuReduce.h"
 #include "../include/GpuReduceA.h"
@@ -27,6 +28,10 @@ public:
 		if (solverType == "cpu")
 		{
 			solverSelect = std::make_shared<CpuSolver<T>>(A, Sum);
+		}
+		else if (solverType == "cpuOmp")
+		{
+			solverSelect = std::make_shared<CpuOmp<T>>(A, Sum);
 		}
 		else if (solverType == "gpuNaive")
 		{
