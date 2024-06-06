@@ -30,6 +30,16 @@
  
 ## HW 3
 - A new GPU solver for HW4
+### Older version:
+| Kernel | Duration (ms) | Transactions <sup>1</sup> | Requests <sup>2</sup> | Transactions per Requests |
+|:-----:|:-----:|-----:|-----:|-----:|
+| row_sums | 24.62 | 268,225,475 | 8,388,608 | 31.95 |
+| col_sums | 25.37 | 33,554,432 | 8,388,608 | 4.00 |
+### New row_sums version with reduction:
+| Kernel | Duration (ms) | Transactions <sup>1</sup> | Requests <sup>2</sup> | Transactions per Requests |
+|:-----:|:-----:|-----:|-----:|-----:|
+| row_sums | 15.55 | 33,554,432 | 8,388,608 | 4.00 |
+| col_sums | 25.37 | 33,554,432 | 8,388,608 | 4.00 |
 
 ### ***NOTE:***
 - All codes have been tested on a personal laptop with an NVIDIA GeForce RTX 2070 with Max-Q Design GPU
