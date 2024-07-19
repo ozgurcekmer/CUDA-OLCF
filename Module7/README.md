@@ -32,3 +32,6 @@ Sequential: 189.59 ms
 Overlap   :  95.47 ms
 Speedup   :   1.99
 ```
+
+## HW 2
+- Delayed until I have an access to multi NVIDIA GPUs.
