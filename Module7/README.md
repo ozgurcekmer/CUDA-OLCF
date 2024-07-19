@@ -4,7 +4,7 @@
 - A personal laptop, ***Hagi***, with NVIDIA GeForce RTX 2070 with Max-Q Design is used for the simulations (with Windows & Microsoft Visual Studio).
 - Codes are developed in object oriented fashion.
 - ***Pinned*** vectors are created by modifying ***std::vector***s.
-- The problem size was set to ~64M (1 << 26).
+- The problem size was set to ~67M (1 << 26).
 - The following flags are used while compiling:
 ```
 --default-stream per-thread
